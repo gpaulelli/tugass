@@ -4,7 +4,11 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 # Load the data
-df = pd.read_csv('C:/Users/Luxford/Documents/Lesson/MVD/Again.csv', delimiter=';', thousands=',', decimal='.')
+uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file, delimiter=';', thousands=',', decimal='.')
+else:
+    st.warning("Please upload a CSV file.")
 
 def create_bubble_chart(x_col, y_col, radius_col, color_col, radius_scaling, cmap):
     fig, ax = plt.subplots(figsize=(6, 4), dpi=100)
